@@ -12,7 +12,7 @@
 5. Subscribe to changes to firestore and broadcast to canvas.
 
 
-### Example class shot
+### Example class canvas
 
 ![screenshot](pixelshare.png)
 
