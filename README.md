@@ -1,5 +1,10 @@
 # PixelShare
 
+> Create a shared pixel canvas.
+
+![screenshot](pixelshare.png)
+
+
 0. Create firestore.json with appropriate credentials (available from console). Run `npm install` inside pixelshare.
 1. Confirm can read values from database by running db.js and adding code for reading from `pixels` db.
 2. Try draw functionality.
