@@ -20,31 +20,20 @@ function setPixel(x,y,fill,id) {
   database.set(ref, {fill,id});
 }
 
-
-
 io.sockets.on('connection', socket => {
 
   if( socket.connected )
   {
-    socket.on('paint', function(data) {
-      setPixel(data.x,data.y,data.fill, socket.id);
-    });
-
     let pixels = database.ref(db, 'pixels');
-    database.onChildChanged(pixels, function( snapshot, prevChildName ) {
-      console.log( snapshot.val(), prevChildName );
+    database.onChildAdded(pixels, function( snapshot, prevChildName ) {
+      console.log( snapshot.key, snapshot.val())
     }); 
-
-
+ 
     socket.on('disconnect', function (reason) {
       console.log(`closing connection ${reason}`);
     })
   }
 });
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

@@ -17,23 +17,32 @@
     var socket = io(host, {transports: ["websocket"] });
 
     var canvas = document.querySelector("#canvas");
+    const myPenColor = myRandomColor();
 
-    function draw(x,y) {
+    function draw(x,y, color) {
       var ctx = canvas.getContext('2d'); 
+      ctx.fillStyle = color || myPenColor;
       ctx.fillRect(x,y,5,5); 
-      ctx.fillStyle = "rgba(255,0,0,255)";
     }
 
     canvas.addEventListener("click", e => 
     { 
-      // if (this.active) 
-      { 
-        var rect = canvas.getBoundingClientRect(); 
-        var x = Math.floor(e.clientX - rect.left); 
-        var y = Math.floor(e.clientY - rect.top); 
-        draw(x,y);
-        socket.emit("paint", {x, y, fill: "rgba(255,0,0,255)"});
-      } 
+      var rect = canvas.getBoundingClientRect(); 
+      var x = Math.floor(e.clientX - rect.left); 
+      var y = Math.floor(e.clientY - rect.top); 
+      draw(x,y);
     });
+
+    function myRandomColor() {
+      const R = randomIntFromInterval(0, 255);
+      const G = randomIntFromInterval(0, 255);
+      const B = randomIntFromInterval(0, 255);
+      return `rgba(${R},${G},${B},255)`;
+    }
+
+    function randomIntFromInterval(min, max) { // min and max included 
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+
   </script>
 </body>
