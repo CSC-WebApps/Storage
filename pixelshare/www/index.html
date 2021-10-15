@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+  <title>PixelShare</title>
+
+  <style>
+    #canvas { box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5); 
+      cursor: crosshair; }
+  </style>
+</head>
+<body>
+  <h1>PixelShare</h1>
+  <canvas id="canvas" width=500 height=500></canvas>
+
+  <script>
+    var canvas = document.querySelector("#canvas");
+
+    function draw(x,y) {
+      var ctx = canvas.getContext('2d'); 
+      ctx.fillRect(x,y,5,5); 
+      ctx.fillStyle = "rgba(255,0,0,255)";
+    }
+    canvas.addEventListener("mousemove", e => 
+    { 
+      // if (this.active) 
+      { 
+        var rect = canvas.getBoundingClientRect(); 
+        var x = e.clientX - rect.left; 
+        var y = e.clientY - rect.top; 
+        draw(x,y);
+      } 
+    });
+  </script>
+</body>
